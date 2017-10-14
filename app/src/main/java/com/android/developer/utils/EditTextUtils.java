@@ -1,4 +1,4 @@
-package com.android.developer.utils;
+  package com.android.developer.utils;
 
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -49,6 +49,24 @@ public class EditTextUtils {
                     return null;
                 }
 
+            }
+        };
+
+        /**
+         * 只能输入中英文和数字
+         */
+        InputFilter allowFilter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart,
+                                       int dend) {
+                String regexStr = "[^a-zA-Z0-9\\u4E00-\\u9FA5_]";
+                Pattern pattern = Pattern.compile(regexStr);
+                Matcher matcher = pattern.matcher(source.toString());
+                if (matcher.matches()) {
+                    return "";
+                } else {
+                    return null;
+                }
             }
         };
 
